@@ -2288,6 +2288,11 @@ declare interface TSPlayer extends TSUnit, TSDBJsonProvider {
     SendQuestGiverStatusMultiple() : void
 
     GetXPForDifficulty(difficulty: uint8) : TSNumber<uint32>;
+
+    /**
+     * Whether the Player has run a random BG since they reset.
+     */
+    GetRandomWinner(): bool;
 }
 
 declare interface TSCorpse extends TSWorldObject {
@@ -7807,6 +7812,7 @@ declare interface TSSpellInfo extends TSEntityProvider {
 	GetAreaGroupID() : TSNumber<uint32>
 	GetAttributes() : TSNumber<uint32>
 	GetAttributesCu() : TSNumber<uint32>
+    GetAttributesCu1() : TSNumber<uint32>
 	GetAttributesEx() : TSNumber<uint32>
 	GetAttributesEx2() : TSNumber<uint32>
 	GetAttributesEx3() : TSNumber<uint32>
@@ -9418,8 +9424,8 @@ declare namespace _hidden {
     }
 
     export class GameEvent<T> {
-        OnStart(callback: (event: uint16)=>void)
-        OnStart(id: EventID, callback: (event: uint16)=>void)
+        OnStart(callback: (event: uint16, thread: TSMainThreadContext)=>void)
+        OnStart(id: EventID, callback: (event: uint16, thread: TSMainThreadContext)=>void)
 
         OnUpdateState(callback: (event: uint16)=>void)
         OnUpdateState(id: EventID, callback: (event: uint16)=>void)
