@@ -2566,3 +2566,88 @@ bool TSUnit::IsSchoolLocked(uint32 schoolMask)
 {
     return unit->GetSpellHistory()->IsSchoolLocked(SpellSchoolMask(schoolMask));
 }
+
+void TSUnit::AddMovementFlag(uint32 flag)
+{
+    unit->AddUnitMovementFlag(flag);
+}
+
+void TSUnit::RemoveMovementFlag(uint32 flag)
+{
+    unit->RemoveUnitMovementFlag(flag);
+}
+
+bool TSUnit::HasMovementFlag(uint32 flag)
+{
+    return unit->HasUnitMovementFlag(flag);
+}
+
+uint32 TSUnit::GetMovementFlags()
+{
+    return unit->GetUnitMovementFlags();
+}
+
+void TSUnit::SetMovementFlags(uint32 flags)
+{
+    unit->SetUnitMovementFlags(flags);
+}
+
+void TSUnit::AddExtraMovementFlag(uint32 flag)
+{
+    unit->AddExtraUnitMovementFlag(flag);
+}
+
+void TSUnit::RemoveExtraMovementFlag(uint32 flag)
+{
+    unit->RemoveExtraUnitMovementFlag(flag);
+}
+
+bool TSUnit::HasExtraMovementFlag(uint32 flag)
+{
+    return unit->HasExtraUnitMovementFlag(flag);
+}
+
+uint32 TSUnit::GetExtraMovementFlags()
+{
+    return unit->GetExtraUnitMovementFlags();
+}
+
+void TSUnit::SetExtraMovementFlags(uint32 flags)
+{
+    unit->SetExtraUnitMovementFlags(flags);
+}
+
+bool TSUnit::IsMoving()
+{
+    return unit->isMoving();
+}
+
+bool TSUnit::IsTurning()
+{
+    return unit->isTurning();
+}
+
+bool TSUnit::CanFly()
+{
+    return unit->CanFly();
+}
+
+bool TSUnit::IsFlying()
+{
+    return unit->IsFlying();
+}
+
+bool TSUnit::CanEnterWater()
+{
+    return unit->CanEnterWater();
+}
+
+float TSUnit::GetHoverOffset()
+{
+    return unit->GetHoverOffset();
+}
+
+float TSUnit::GetPitch()
+{
+    return unit->m_movementInfo.pitch;
+}

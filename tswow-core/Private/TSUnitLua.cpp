@@ -207,6 +207,28 @@ void TSLua::load_unit_methods(sol::state& state)
     LUA_FIELD_OVERLOAD_2_1(ts_unit, TSUnit, Jump, float, float, bool);
     ts_unit.set_function("GetControlled", &TSUnit::LGetControlled);
     LUA_FIELD(ts_unit, TSUnit, KnockbackFrom);
+
+    // Movement flag methods
+    LUA_FIELD(ts_unit, TSUnit, AddMovementFlag);
+    LUA_FIELD(ts_unit, TSUnit, RemoveMovementFlag);
+    LUA_FIELD(ts_unit, TSUnit, HasMovementFlag);
+    LUA_FIELD(ts_unit, TSUnit, GetMovementFlags);
+    LUA_FIELD(ts_unit, TSUnit, SetMovementFlags);
+
+    LUA_FIELD(ts_unit, TSUnit, AddExtraMovementFlag);
+    LUA_FIELD(ts_unit, TSUnit, RemoveExtraMovementFlag);
+    LUA_FIELD(ts_unit, TSUnit, HasExtraMovementFlag);
+    LUA_FIELD(ts_unit, TSUnit, GetExtraMovementFlags);
+    LUA_FIELD(ts_unit, TSUnit, SetExtraMovementFlags);
+
+    LUA_FIELD(ts_unit, TSUnit, IsMoving);
+    LUA_FIELD(ts_unit, TSUnit, IsTurning);
+    LUA_FIELD(ts_unit, TSUnit, CanFly);
+    LUA_FIELD(ts_unit, TSUnit, IsFlying);
+    LUA_FIELD(ts_unit, TSUnit, CanEnterWater);
+    LUA_FIELD(ts_unit, TSUnit, GetHoverOffset);
+    LUA_FIELD(ts_unit, TSUnit, GetPitch);
+
     ts_unit.set_function("JumpTo", sol::overload(
         [](TSUnit& unit, TSWorldObject obj, float speedZ, bool withOrientation) { return unit.JumpTo(obj, speedZ, withOrientation); },
         [](TSUnit& unit, TSWorldObject obj, float speedZ) { return unit.JumpTo(obj, speedZ); },

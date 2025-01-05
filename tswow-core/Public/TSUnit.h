@@ -228,6 +228,28 @@ public:
     TSNumber<uint32> GetArmor();
     void SetResistance(uint32 school, int32 val);
     void SetArmor(int32 val);
+
+    // Movement flag methods
+    void AddMovementFlag(uint32 flag);
+    void RemoveMovementFlag(uint32 flag);
+    bool HasMovementFlag(uint32 flag);
+    uint32 GetMovementFlags();
+    void SetMovementFlags(uint32 flags);
+
+    void AddExtraMovementFlag(uint32 flag);
+    void RemoveExtraMovementFlag(uint32 flag);
+    bool HasExtraMovementFlag(uint32 flag);
+    uint32 GetExtraMovementFlags();
+    void SetExtraMovementFlags(uint32 flags);
+
+    bool IsMoving();
+    bool IsTurning();
+    bool CanFly();
+    bool IsFlying();
+    bool CanEnterWater();
+    float GetHoverOffset();
+    float GetPitch();
+
 private:
     TSLua::Array<TSUnit> LGetControlled();
     friend class TSLua;
