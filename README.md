@@ -1,3 +1,10 @@
+# WCD
+This repository is a fork of TSWoW. It includes general additions and bugfixes and some features exclusive to the project. 
+To contribute, please first create a branch and push those changes to the branch. Once it all works, we can attempt to merge them with the main branch.
+
+## Compilation
+This project needs to be compilled following [this guide](https://tswow.github.io/tswow-wiki/install/compiling.html) (use [this other guide for Linux](https://tswow.github.io/tswow-wiki/install/compiling-linux.html), but I can't guarantee it's going to work well).
+
 # TSWoW
 
 TSWoW (TypeScript WoW) is a **free** modding framework, mod loader and integrated development environment for the World of Warcraft: Wrath of the Lich King (WotLK) expansion build around the [TrinityCore](https://github.com/trinitycore/trinitycore) emulator.
