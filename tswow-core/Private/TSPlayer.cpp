@@ -4151,3 +4151,8 @@ void TSPlayer::LSendShowMailBox1(TSNumber<uint32> guid)
 {
     return SendShowMailBox(guid);
 }
+
+void TSPlayer::SendActionButtons(uint32 state)
+{
+    player->SendActionButtons(state);
+}

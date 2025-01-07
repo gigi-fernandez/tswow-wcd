@@ -3314,6 +3314,12 @@ declare interface TSAchievementCriteriaEntry
     GetStartTimer(): TSNumber<uint32>
 }
 
+declare const enum ActionButtonState /**@realType:uint32*/ {
+    DONT_USE = 0,    // Initial state, has difficulties on Trinity
+    NORMAL  = 1,    // Used for sending button data
+    CLEAR   = 2     // Clears action bars client-side during spec swaps
+}
+
 declare interface TSPlayer extends TSUnit, TSDBJsonProvider {
     LearnClassSpells(trainer: boolean, quests: boolean, limitQuestsByLevel?: boolean);
     SendData(data: any)
@@ -5248,6 +5254,8 @@ declare interface TSPlayer extends TSUnit, TSDBJsonProvider {
 
     GetFace(): TSNumber<uint8>;
     SetFace(face: uint8);
+
+    SendActionButtons(state: ActionButtonState): void;
 }
 
 declare interface TSCorpse extends TSWorldObject {
