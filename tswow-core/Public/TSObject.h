@@ -98,6 +98,8 @@ public:
     bool IsItem();
 
     bool operator==(TSObject& rhs);
+
+    void SendUpdateToPlayer(TSPlayer player);
 };
 
 TC_GAME_API TSItem ToItem(TSObject);

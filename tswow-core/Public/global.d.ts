@@ -196,6 +196,12 @@ declare const enum TimerLoops /**@realType:uint32*/ {
     ONCE = 1,
     INDEFINITE = -1,
 }
+declare const enum ItemUpdateState /**@realType:uint32*/ {
+    UNCHANGED = 0,
+    CHANGED = 1,
+    NEW = 2,
+    REMOVED = 3
+}
 declare const enum Outfit /**@realType:uint32_t*/ {
     SOUND_ID   = 0x1,
     GUILD      = 0x2,
@@ -390,10 +396,6 @@ declare const enum SpellCastResult /**@realType:uint8*/ {
     FAILED_NO_PLAYTIME = 165,
     FAILED_NOT_IN_BATTLEGROUND = 166,
     FAILED_NOT_IN_RAID_INSTANCE = 167,
-    FAILED_ONLY_IN_ARENA = 168,
-    FAILED_TARGET_LOCKED_TO_RAID_INSTANCE = 169,
-    FAILED_ON_USE_ENCHANT = 170,
-    FAILED_NOT_ON_GROUND = 171,
     FAILED_CUSTOM_ERROR = 172,
     FAILED_CANT_DO_THAT_RIGHT_NOW = 173,
     FAILED_TOO_MANY_SOCKETS = 174,
@@ -1581,13 +1583,6 @@ declare const enum AuraType /**@realType:uint32*/ {
     EMPATHY                                      = 121,
     MOD_OFFHAND_DAMAGE_PCT                       = 122,
     MOD_TARGET_RESISTANCE                        = 123,
-    MOD_RANGED_ATTACK_POWER                      = 124,
-    MOD_MELEE_DAMAGE_TAKEN                       = 125,
-    MOD_MELEE_DAMAGE_TAKEN_PCT                   = 126,
-    RANGED_ATTACK_POWER_ATTACKER_BONUS           = 127,
-    MOD_POSSESS_PET                              = 128,
-    MOD_SPEED_ALWAYS                             = 129,
-    MOD_MOUNTED_SPEED_ALWAYS                     = 130,
     MOD_RANGED_ATTACK_POWER_VERSUS               = 131,
     MOD_INCREASE_ENERGY_PERCENT                  = 132,
     MOD_INCREASE_HEALTH_PERCENT                  = 133,
@@ -7271,7 +7266,7 @@ declare class TSItem extends TSObject {
     IsCurrencyToken() : bool
 
     /**
-     * Returns 'true' if the [Item] is a not an empty bag, 'false' otherwise
+     * Returns 'true' if the [Item] is not an empty bag, 'false' otherwise
      *
      * @return bool isNotEmptyBag
      */
@@ -7347,198 +7342,6 @@ declare class TSItem extends TSObject {
      * @return bool isConjuredConsumable
      */
     IsConjuredConsumable() : bool
-    //GetItemLink(locale : uint8) : string
-
-    GetTemplate(): TSItemTemplate
-
-    GetOwnerGUID() : TSGUID
-
-    /**
-     * Returns the [Player] who currently owns the [Item]
-     *
-     * @return [Player] player : the [Player] who owns the [Item]
-     */
-    GetOwner() : TSPlayer
-
-    /**
-     * Returns the [Item]s stack count
-     *
-     * @return uint32 count
-     */
-    GetCount() : TSNumber<uint32>
-
-    /**
-     * Returns the [Item]s max stack count
-     *
-     * @return uint32 maxCount
-     */
-    GetMaxStackCount() : TSNumber<uint32>
-
-    /**
-     * Returns the [Item]s current slot
-     *
-     * @return uint8 slot
-     */
-    GetSlot() : TSNumber<uint8>;
-
-    /**
-     * Returns the [Item]s current bag slot
-     *
-     * @return uint8 bagSlot
-     */
-    GetBagSlot() : TSNumber<uint8>;
-
-    /**
-     * Returns the [Item]s enchantment ID by enchant slot specified
-     *
-     * @param [EnchantmentSlot] enchantSlot : the enchant slot specified
-     * @return uint32 enchantId : the id of the enchant slot specified
-     */
-    GetEnchantmentID(enchant_slot : EnchantmentSlot) : TSNumber<uint32>
-
-    /**
-     * Returns the spell ID tied to the [Item] by spell index
-     *
-     * @param uint32 spellIndex : the spell index specified
-     * @return uint32 spellId : the id of the spell
-     */
-    GetSpellID(index : uint32) : TSNumber<uint32>
-
-    /**
-     * Returns the spell trigger tied to the [Item] by spell index
-     *
-     * @param uint32 spellIndex : the spell index specified
-     * @return uint32 spellTrigger : the spell trigger of the specified index
-     */
-    GetSpellTrigger(index : uint32) : TSNumber<uint32>
-
-    /**
-     * Returns class of the [Item]
-     *
-     * @return uint32 class
-     */
-    GetClass() : TSNumber<uint32>
-
-    /**
-     * Returns subclass of the [Item]
-     *
-     * @return uint32 subClass
-     */
-    GetSubClass() : TSNumber<uint32>
-
-    /**
-     * Returns the name of the [Item]
-     *
-     * @return string name
-     */
-    GetName() : string
-
-    /**
-     * Returns the display ID of the [Item]
-     *
-     * @return uint32 displayId
-     */
-    GetDisplayID() : TSNumber<uint32>
-
-    /**
-     * Returns the quality of the [Item]
-     *
-     * @return uint32 quality
-     */
-    GetQuality() : TSNumber<uint32>
-
-    /**
-     * Returns the default purchase count of the [Item]
-     *
-     * @return uint32 count
-     */
-    GetBuyCount() : TSNumber<uint32>
-
-    /**
-     * Returns the purchase price of the [Item]
-     *
-     * @return uint32 price
-     */
-    GetBuyPrice() : TSNumber<uint32>
-
-    /**
-     * Returns the sell price of the [Item]
-     *
-     * @return uint32 price
-     */
-    GetSellPrice() : TSNumber<uint32>
-
-    /**
-     * Returns the inventory type of the [Item]
-     *
-     * @return uint32 inventoryType
-     */
-    GetInventoryType() : TSNumber<uint32>
-
-    /**
-     * Returns the [Player] classes allowed to use this [Item]
-     *
-     * @return uint32 allowableClass
-     */
-    GetAllowableClass() : TSNumber<uint32>
-
-    /**
-     * Returns the [Player] races allowed to use this [Item]
-     *
-     * @return uint32 allowableRace
-     */
-    GetAllowableRace() : TSNumber<uint32>
-
-    /**
-     * Returns the [Item]s level
-     *
-     * @return uint32 itemLevel
-     */
-    GetItemLevel() : TSNumber<uint32>
-
-    /**
-     * Returns the minimum level required to use this [Item]
-     *
-     * @return uint32 requiredLevel
-     */
-    GetRequiredLevel() : TSNumber<uint32>
-    GetStatsCount() : TSNumber<uint32>
-
-    /**
-     * Returns the random property ID of this [Item]
-     *
-     * @return uint32 randomPropertyId
-     */
-    GetRandomProperty() : TSNumber<uint32>
-    GetRandomSuffix() : TSNumber<int32>
-
-    /**
-     * Returns the item set ID of this [Item]
-     *
-     * @return uint32 itemSetId
-     */
-    GetItemSet() : TSNumber<uint32>
-
-    /**
-     * Returns the bag size of this [Item], 0 if [Item] is not a bag
-     *
-     * @return uint32 bagSize
-     */
-    GetBagSize() : TSNumber<uint32>
-
-    /**
-     * Sets the [Player] specified as the owner of the [Item]
-     *
-     * @param [Player] player : the [Player] specified
-     */
-    SetOwner(player : TSPlayer) : void
-
-    /**
-     * Sets the binding of the [Item] to 'true' or 'false'
-     *
-     * @param bool setBinding
-     */
-    SetBinding(soulbound : bool) : void
 
     /**
      * Sets the stack count of the [Item]
@@ -7568,6 +7371,13 @@ declare class TSItem extends TSObject {
      * Saves the [Item] to the database
      */
     SaveToDB() : void
+
+    /**
+     * Sets the update state of the item
+     * @param state The new state (ItemUpdateState)
+     * @param forplayer The player to update for
+     */
+    SetState(state: ItemUpdateState, forplayer: TSPlayer): void;
 }
 
 declare interface TSBattlegroundPlayer extends TSEntityProvider, TSWorldEntityProvider<TSBattlegroundPlayer>{
@@ -8954,6 +8764,12 @@ declare class TSObject extends TSEntityProvider {
      * @param uint32 flag
      */
     RemoveFlag(index : uint16,flag : uint32) : void
+
+    /**
+     * Sends an update packet for this object to the specified player
+     * @param player The player to send the update to
+     */
+    SendUpdateToPlayer(player: TSPlayer): void;
 
     /**
      * @deprecated use free function 'ToCorpse'
@@ -12877,7 +12693,7 @@ declare class DBArrayEntry {
      * Returns true if this entry will be saved to database on the
      * next call to DBContainer#Save on its owner.
      */
-    IsDirty();
+    IsDirty(): boolean;
 
     /**
      * Marks this entry for deletion. A deleted entry cannot
@@ -12888,7 +12704,7 @@ declare class DBArrayEntry {
     /**
      * Returns true if this entry has been deleted from its owner.
      */
-    IsDeleted();
+    IsDeleted(): boolean;
 
     /**
      * Returns the internal Index used by this array entry.

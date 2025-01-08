@@ -492,3 +492,9 @@ TSCorpse ToCorpse(TSObject obj)
 {
     return TSCorpse(obj.obj ? obj->ToCorpse() : nullptr);
 }
+
+void TSObject::SendUpdateToPlayer(TSPlayer player)
+{
+    if (!obj || !player.player) return;
+    obj->SendUpdateToPlayer(player.player);
+}

@@ -90,6 +90,7 @@ public:
     bool SetEnchantment(uint32 enchant, uint32 slot);
     bool ClearEnchantment(uint32 slot);
     void SaveToDB();
+    void SetState(uint32 state, TSPlayer forplayer);
 };
 
 TC_GAME_API TSItem CreateItem(uint32 entry = 0, uint32 count = 0);

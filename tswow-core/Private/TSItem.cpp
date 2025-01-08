@@ -712,3 +712,9 @@ TSNumber<uint32> TSItem::GetEnchantmentCharges(uint32 slot)
 {
     return item->GetEnchantmentCharges(static_cast<EnchantmentSlot>(slot));
 }
+
+void TSItem::SetState(uint32 state, TSPlayer forplayer)
+{
+    if (!item) return;
+    item->SetState(static_cast<ItemUpdateState>(state), forplayer.player);
+}
